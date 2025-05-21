@@ -1,3 +1,15 @@
 <template>
-    
+    <lightning-card title="Appeal Campaign History" icon-name="standard:campaign">
+        <template if:true={hasCampaigns}>
+            <lightning-datatable
+                key-field="Id"
+                data={campaignData}
+                columns={columns}
+                hide-checkbox-column>
+            </lightning-datatable>
+        </template>
+        <template if:true={error}>
+            <p class="slds-text-color_error">{error}</p>
+        </template>
+    </lightning-card>
 </template>

@@ -1,10 +1,10 @@
 import { LightningElement, wire, api } from 'lwc';
-import getCampaignsForContact from '@salesforce/apex/CampaignMemberController.getCampaignsForContact'; 
+import getCampaignsForContact from '@salesforce/apex/CampaignMemberController.getCampaignsForContact';
 
 export default class CampaignMemberList extends LightningElement {
     @api recordId;  // This will be the Contact ID passed from the page layout
     campaignData = [];  // Store the list of Campaign data
-    error;            // Store any error message
+    error;              // Store any error message
 
     // Define the columns for the lightning-datatable
     columns = [
@@ -25,5 +25,10 @@ export default class CampaignMemberList extends LightningElement {
             this.error = error;
             console.error('Error fetching campaigns:', error);
         }
+    }
+
+    // Getter to safely check if campaign data exists
+    get hasCampaigns() {
+        return Array.isArray(this.campaignData) && this.campaignData.length > 0;
     }
 }
